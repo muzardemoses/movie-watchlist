@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import "../App.css";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
@@ -16,45 +17,64 @@ export const SearchResults = ({ searchResults, loading }) => {
     .slice(pagesVisited, pagesVisited + moviesPerPage)
     .map((movie) => {
       return (
-        <div key={movie.id} className="flex flex-col gap-4">
-          <h4>{movie.title}</h4>
-        </div>
+        <button
+          key={movie.id}
+          className="text-sm font-medium border rounded-lg text-left bg-gray-700 border-gray-600 text-white flex justify-between items-center px-4 py-2 hover:bg-gray-600 cursor-pointer focus:ring-2 focus:outline-none focus:ring-gray-500 mb-2 transition ease-in-out duration-300"
+        >
+          <h4 className="text-base font-medium">
+            {movie.title}
+          </h4>
+        </button>
       );
     });
 
   return (
-    <div className="h-full bg-[#1e2a47] rounded-xl p-10 shadow-xl">
+    <div className="h-full bg-[#1e2a47] rounded-xl p-10 pb-14 shadow-xl">
       {loading && (
         <div className="h-full flex justify-center items-center">
           <p className="text-[#f9f9f9] text-lg font-light">Loading...</p>
         </div>
       )}
-      <h1 className="text-[#f9f9f9] text-left text-4xl font-mono">
-        {SearchResults.length > 0 ? "Search Results" : "Search for a movie"}
-      </h1>
-      <p className="text-[#f9f9f9] text-base font-light">
-        Click on a movie to add it to your wishlist
-      </p>
 
       {!loading && searchResults.length === 0 ? (
         <div className="h-full flex justify-center items-center">
-          <p className="text-[#f9f9f9] text-lg font-light">No results found</p>
+          <p className="text-[#f9f9f9] text-lg font-light">
+            No movie found. Check your spelling and try again. 😔
+          </p>
         </div>
       ) : (
-        <div className="flex justify-center items-center">
-          <ul className="mt-10 grid grid-cols-2 gap-10">{displayMovies}</ul>
-          <ReactPaginate
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-          />
-        </div>
+        !loading &&
+        searchResults.length > 0 && (
+          <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-3">
+              <h1 className="text-[#f9f9f9] text-left text-3xl font-mono">
+                {SearchResults.length > 0
+                  ? "Search Results"
+                  : "Search for a movie"}
+              </h1>
+              <p className="text-[#f9f9f9] font-light">
+                Click on a movie to add it to your wishlist
+              </p>
+            </div>
+            <div className="flex flex-col gap-14">
+              <div className="flex flex-col gap-3">{displayMovies}</div>
+              <div>
+                {/* Styling for the pagination component is in src\App.css */}
+                <ReactPaginate
+                  previousLabel={"Prev"}
+                  nextLabel={"Next"}
+                  pageCount={pageCount}
+                  onPageChange={changePage}
+                  containerClassName={"paginationBttns"}
+                  previousLinkClassName={"previousBttn"}
+                  nextLinkClassName={"nextBttn"}
+                  disabledClassName={"paginationDisabled"}
+                  activeClassName={"paginationActive"}
+                />
+              </div>
+            </div>
+          </div>
+        )
       )}
     </div>
   );

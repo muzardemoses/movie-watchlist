@@ -1,0 +1,59 @@
+.paginationBttns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #070a18;
+  background-color: rgb(118, 189, 218);
+  transition: 0.5s ease-in-out;
+}
+
+.paginationBttns a:hover {
+  background-color: rgb(61, 126, 151);
+  color: #fff;
+}
+
+.paginationBttns a:focus {
+  outline: none;
+  border: 1px solid #070a18;
+}
+
+.paginationActive a {
+  background-color: rgb(17, 68, 90);
+  color: #aed2e7;
+  border: none;
+}
+
+.paginationDisabled a {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.next a {
+  background-color: rgb(9, 68, 78);
+  color: #e4eff7;
+  border: none;
+}
+
+.previous a {
+  background-color: rgb(9, 68, 78);
+  color: #e4eff7;
+  border: none;
+}
+
+.next a:hover {
+  background-color: rgb(20, 83, 94);
+  color: #e4eff7;
+}
+
+.previous a:hover {
+  background-color: rgb(20, 83, 94);
+  color: #e4eff7;
+}

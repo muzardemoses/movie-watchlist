@@ -9,7 +9,7 @@ function App() {
   const [loading , setLoading] = useState(false);
 
   return (
-    <div className="bg-[#141d2f] min-h-screen flex gap-28 pt-28 px-20 pb-10">
+    <div className="bg-[#141d2f] min-h-screen flex gap-28 pt-28 px-20 pb-28">
       <div className="w-[45%] flex flex-col gap-16">
         <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle} setSearchResults={setSearchResults} setLoading={setLoading} />
         <SearchResults searchResults={searchResults} loading={loading} />
