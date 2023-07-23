@@ -1,4 +1,39 @@
-export const SearchBar = () => {
+/* eslint-disable react/prop-types */
+import { useEffect } from "react";
+
+export const SearchBar = ({
+  movieTitle,
+  setMovieTitle,
+  setSearchResults,
+  setLoading,
+}) => {
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MDAyMDc2YzhkZTc0MDMwODZkZjM0YTg3MjAxOGNlNyIsInN1YiI6IjY0YmM2M2IxZTlkYTY5MDEyZTBkZDBlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mzhh49XVRxyQjBXW-7lxSTu7kTzDOakFDA1CPPq7NyU",
+      },
+    };
+
+    // Perform the fetch when the component mounts or whenever the movieTitle changes
+    setLoading(true);
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${movieTitle}&page=1`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        setSearchResults(response.results);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [movieTitle, setLoading, setSearchResults]); // Run the effect whenever the movieTitle changes
+
   return (
     <div className="relative">
       <div className="h-12 inset-y-0 left-0 flex items-center pl-3.5 absolute">
@@ -22,8 +57,8 @@ export const SearchBar = () => {
       <input
         type="search"
         placeholder="Search for a movie to add..."
-        //value={updateUsers}
-        //onChange={(e) => setUpdateUsers(e.target.value)}
+        value={movieTitle}
+        onChange={(e) => setMovieTitle(e.target.value)}
         required
         className="text-gray-200 h-12 w-full rounded-md pl-14 bg-[#1e2a47] border-none transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50"
       />
