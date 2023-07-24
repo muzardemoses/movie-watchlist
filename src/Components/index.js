@@ -1,3 +1,3 @@
 export * from './SearchBar';
 export * from './SearchResults';
-export * from './WishList';
+export * from './WatchList';

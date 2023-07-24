@@ -3,7 +3,7 @@ import "../App.css";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
-export const SearchResults = ({ searchResults, loading }) => {
+export const SearchResults = ({ searchResults, loading, setWatchList }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const moviesPerPage = 5;
   const pagesVisited = pageNumber * moviesPerPage;
@@ -13,6 +13,31 @@ export const SearchResults = ({ searchResults, loading }) => {
     setPageNumber(selected);
   };
 
+  const handleAddToWatchList = (movie) => {
+    // Retrieve the current watchlist from localStorage
+    const currentWatchList = JSON.parse(
+      localStorage.getItem("watchList") || "[]"
+    );
+
+    // Update the movie object with the new properties
+    const updatedMovie = {
+      ...movie,
+      isWatched: false, // Set isWatched to false by default
+      ratingByUser: null, // Set ratingByUser to null by default
+    };
+
+    // Add the updated movie to the watchlist
+    const updatedWatchList = [...currentWatchList, updatedMovie];
+
+    // Save the updated watchlist to localStorage
+    localStorage.setItem("watchList", JSON.stringify(updatedWatchList));
+
+    // Update the watchlist state with the new movie
+    setWatchList(updatedWatchList);
+
+    console.log(movie.title + " added to watchlist");
+  };
+
   const displayMovies = searchResults
     .slice(pagesVisited, pagesVisited + moviesPerPage)
     .map((movie) => {
@@ -20,10 +45,9 @@ export const SearchResults = ({ searchResults, loading }) => {
         <button
           key={movie.id}
           className="text-sm font-medium border rounded-lg text-left bg-gray-700 border-gray-600 text-white flex justify-between items-center px-4 py-2 hover:bg-gray-600 cursor-pointer focus:ring-2 focus:outline-none focus:ring-gray-500 mb-2 transition ease-in-out duration-300"
+          onClick={() => handleAddToWatchList(movie)}
         >
-          <h4 className="text-base font-medium">
-            {movie.title}
-          </h4>
+          <h4 className="text-base font-medium">{movie.title}</h4>
         </button>
       );
     });
