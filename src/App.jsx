@@ -11,7 +11,7 @@ function App() {
 
 
   return (
-    <div className="bg-[#141d2f] flex gap-28 pt-28 px-20 pb-28 overflow-hidden">
+    <div className="bg-[#141d2f] flex gap-24 pt-28 px-20 pb-28 overflow-hidden">
       <div className="w-[45%] flex flex-col gap-16">
         <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle} setSearchResults={setSearchResults} setLoading={setLoading} />
         <SearchResults searchResults={searchResults} loading={loading} setWatchList={setWatchList} />
