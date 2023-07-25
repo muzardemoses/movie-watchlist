@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState } from "react";
 import { SearchBar, WatchList, SearchResults } from "./Components";
-//import ReactPaginate from "react-paginate";
 
 function App() {
   const [movieTitle, setMovieTitle] = useState("movie");

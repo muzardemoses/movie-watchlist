@@ -1,36 +1,84 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Rating } from "./Rating";
+import { handleRemoveMovie, handleWatched } from "../Hooks";
+import CloseSVG from "../assets/Close.svg";
+
 
 export const WatchList = ({ watchList, setWatchList }) => {
+  const [showWatchedOnly, setShowWatchedOnly] = useState(false);
+
+  const handleSetFilter = (filter) => {
+    setShowWatchedOnly(filter);
+    localStorage.setItem("showWatchedOnly", JSON.stringify(filter));
+  };
+
   useEffect(() => {
     const savedWatchList = JSON.parse(localStorage.getItem("watchList"));
     setWatchList(savedWatchList || []);
   }, [setWatchList]);
 
-  const handleRemoveMovie = (id) => {
-    const newWatchList = watchList.filter((movie) => movie.id !== id);
-    setWatchList(newWatchList);
-    localStorage.setItem("watchList", JSON.stringify(newWatchList));
-  };
+  useEffect(() => {
+    const savedFilter = JSON.parse(localStorage.getItem("showWatchedOnly"));
+    if (savedFilter) {
+      setShowWatchedOnly(savedFilter);
+    }
+  }, []);
 
-  //const res = JSON.parse(localStorage.getItem("watchList")) || [];
+  // Filter the watchList based on showWatchedOnly state
+  const filteredWatchList = showWatchedOnly
+    ? watchList.filter((movie) => movie.isWatched)
+    : watchList;
 
   return (
-    <div className="bg-[#1e2a47] rounded-xl p-6 shadow-xl flex flex-col gap-10 h-full">
-      <h1 className="text-white text-left text-3xl font-mono">
-        Your Watchlist
-      </h1>
+    <div className="bg-[#1e2a47] rounded-xl p-6 pt-8 shadow-xl flex flex-col gap-10 h-full">
+      <div className="flex justify-between items-center">
+        <h1 className="text-white text-left text-3xl font-mono">
+          Your Watchlist
+        </h1>
+        <div className="flex items-center gap-3">
+          <h4 className="text-white text-sm font-light">Filter by: </h4>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => handleSetFilter(false)}
+              className={`text-white text-base font-semibold border-[#1e2a47] border-b-2 hover:border-white transition ease-in-out duration-300
+               ${
+                 !showWatchedOnly
+                   ? "text-blue-500 border-blue-500 hover:border-blue-500 transition ease-in-out duration-300"
+                   : ""
+               }
+              `}
+            >
+              All
+            </button>
+            <p className="text-white text-base font-semibold">/</p>
+            <button
+              onClick={() => handleSetFilter(true)}
+              className={`text-white text-base font-semibold border-[#1e2a47] border-b-2 hover:border-white transition ease-in-out duration-300
+                ${
+                  showWatchedOnly
+                    ? "text-blue-500 border-blue-500 hover:border-blue-500 transition ease-in-out duration-300"
+                    : ""
+                }
+              `}
+            >
+              Watched
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div className="h-full flex justify-center items-center">
-        {watchList.length === 0 ? (
+        {filteredWatchList.length === 0 ? (
           <h3 className="text-white text-center text-xl">
             Your Watchlist is Empty
           </h3>
         ) : (
-          <div className="w-full flex flex-col gap-4 py-10 overflow-y-auto h-[60vh] watchlist-container">
-            {watchList.map((movie) => (
+          <div className="w-full flex flex-col gap-4 pb-8 overflow-y-auto h-[58vh] watchlist-container">
+            {filteredWatchList.map((movie) => (
               <div
                 key={movie.id}
-                className="w-full flex flex-col bg-[#12234b] rounded-xl px-4 py-4 gap-4 transition ease-in-out duration-300"
+                className="w-full flex flex-col bg-[#12234b] rounded-xl px-4 py-4 gap-1 transition ease-in-out duration-300"
               >
                 <div className="flex justify-between items-start gap-16">
                   {" "}
@@ -45,33 +93,33 @@ export const WatchList = ({ watchList, setWatchList }) => {
                   </h1>
                   <button
                     className="text-white p-2 rounded-full bg-[#1b2c52] hover:bg-[#1e2a47] transition ease-in-out duration-300"
-                    onClick={() => handleRemoveMovie(movie.id)}
+                    onClick={() =>
+                      handleRemoveMovie(movie.id, watchList, setWatchList)
+                    }
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-x"
-                    >
-                      <path d="M18 6 6 18" />
-                      <path d="m6 6 12 12" />
-                    </svg>
+                    <img src={CloseSVG} alt="Close" className="h-5 w-5" />
                   </button>
                 </div>
-                <div>{movie.release_date}</div>
+                <div className="flex gap-5 text-white">
+                  <div className="flex gap-1 items-center">
+                    <p className="text-sm font-light">Watched: </p>
+                    <input
+                      type="checkbox"
+                      checked={movie.isWatched}
+                      onChange={() =>
+                        handleWatched(movie.id, watchList, setWatchList)
+                      }
+                      className="cursor-pointer"
+                    />
+                  </div>
+                  <Rating
+                    movie={movie}
+                    watchList={watchList}
+                    setWatchList={setWatchList}
+                  />
+                </div>
               </div>
             ))}
-            {/* {res.map((movie) => (
-              <div key={movie.id} className="flex justify-between items-center bg-slate-200">
-                {movie.title}
-                </div>
-            ))} */}
           </div>
         )}
       </div>

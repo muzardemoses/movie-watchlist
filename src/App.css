@@ -2,28 +2,23 @@
 
 /* Hide the scrollbar for the WatchList container */
 .watchlist-container::-webkit-scrollbar {
-    width: 0;
-  }
-  
-  /* Optional: Customize scrollbar background and thumb */
-  .watchlist-container::-webkit-scrollbar-track {
-    background: transparent; /* Set to 'transparent' to hide the scrollbar background */
-  }
-  
-  .watchlist-container::-webkit-scrollbar-thumb {
-    background: transparent; /* Set to 'transparent' to hide the scrollbar thumb */
-  }
+  width: 0;
+}
 
-  /* scroll animation */
-    .watchlist-container {
-        overflow-y: scroll;
-        scroll-behavior: smooth;
-    }
-  
+/* Optional: Customize scrollbar background and thumb */
+.watchlist-container::-webkit-scrollbar-track {
+  background: transparent; /* Set to 'transparent' to hide the scrollbar background */
+}
 
+.watchlist-container::-webkit-scrollbar-thumb {
+  background: transparent; /* Set to 'transparent' to hide the scrollbar thumb */
+}
 
-
-
+/* scroll animation */
+.watchlist-container {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
 
 .paginationBttns {
   display: flex;
