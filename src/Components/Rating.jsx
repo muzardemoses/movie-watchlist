@@ -20,7 +20,7 @@ export const Rating = ({movie, watchList, setWatchList }) => {
                 : NoRatedStarSVG
             }
             alt="Rated Star"
-            className="h-5 w-5"
+            className="h-5 w-5 sm:h-4 sm:w-4"
           />
         </button>
         <button
@@ -36,7 +36,7 @@ export const Rating = ({movie, watchList, setWatchList }) => {
                 : NoRatedStarSVG
             }
             alt="Rated Star"
-            className="h-5 w-5"
+            className="h-5 w-5 sm:h-4 sm:w-4"
           />
         </button>
         <button
@@ -52,7 +52,7 @@ export const Rating = ({movie, watchList, setWatchList }) => {
                 : NoRatedStarSVG
             }
             alt="Rated Star"
-            className="h-5 w-5"
+            className="h-5 w-5 sm:h-4 sm:w-4"
           />
         </button>
         <button
@@ -68,7 +68,7 @@ export const Rating = ({movie, watchList, setWatchList }) => {
                 : NoRatedStarSVG
             }
             alt="Rated Star"
-            className="h-5 w-5"
+            className="h-5 w-5 sm:h-4 sm:w-4"
           />
         </button>
         <button
@@ -84,7 +84,7 @@ export const Rating = ({movie, watchList, setWatchList }) => {
                 : NoRatedStarSVG
             }
             alt="Rated Star"
-            className="h-5 w-5"
+            className="h-5 w-5 sm:h-4 sm:w-4"
           />
         </button>
       </div>

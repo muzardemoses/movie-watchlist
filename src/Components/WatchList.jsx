@@ -31,17 +31,17 @@ export const WatchList = ({ watchList, setWatchList }) => {
     : watchList;
 
   return (
-    <div className="bg-[#1e2a47] rounded-xl p-6 pt-8 shadow-xl flex flex-col gap-10 h-full">
-      <div className="flex justify-between items-center">
-        <h1 className="text-white text-left text-3xl font-mono">
+    <div className="bg-[#1e2a47] rounded-xl p-6 pt-8 shadow-xl flex flex-col gap-10 h-full sm:p-4 sm:pt-6">
+      <div className="flex justify-between items-center sm:flex-col sm:gap-3 sm:items-start">
+        <h1 className="text-white text-left text-3xl font-mono sm:text-2xl">
           Your Watchlist
         </h1>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 sm:gap-1 sm:place-selfend">
           <h4 className="text-white text-sm font-light">Filter by: </h4>
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => handleSetFilter(false)}
-              className={`text-white text-base font-semibold border-[#1e2a47] border-b-2 hover:border-white transition ease-in-out duration-300
+              className={`text-white text-base font-semibold border-[#1e2a47] border-b-2 hover:border-white transition ease-in-out duration-300 sm:text-sm
                ${
                  !showWatchedOnly
                    ? "text-blue-500 border-blue-500 hover:border-blue-500 transition ease-in-out duration-300"
@@ -51,10 +51,10 @@ export const WatchList = ({ watchList, setWatchList }) => {
             >
               All
             </button>
-            <p className="text-white text-base font-semibold">/</p>
+            <p className="text-white text-base font-semibold sm:text-sm">/</p>
             <button
               onClick={() => handleSetFilter(true)}
-              className={`text-white text-base font-semibold border-[#1e2a47] border-b-2 hover:border-white transition ease-in-out duration-300
+              className={`text-white text-base font-semibold border-[#1e2a47] border-b-2 hover:border-white transition ease-in-out duration-300 sm:text-sm
                 ${
                   showWatchedOnly
                     ? "text-blue-500 border-blue-500 hover:border-blue-500 transition ease-in-out duration-300"
@@ -68,19 +68,19 @@ export const WatchList = ({ watchList, setWatchList }) => {
         </div>
       </div>
 
-      <div className="h-full flex justify-center items-center">
+      <div className="h-full flex justify-center">
         {filteredWatchList.length === 0 ? (
-          <h3 className="text-white text-center text-xl">
+          <h3 className="flex justify-center items-center text-white text-center text-xl xl:min-h-[300px]">
             Your Watchlist is Empty
           </h3>
         ) : (
-          <div className="w-full flex flex-col gap-4 pb-8 overflow-y-auto h-[58vh] watchlist-container">
+          <div className="w-full flex flex-col items-start gap-4 pb-8 overflow-y-auto max-h-[58vh] watchlist-container xl:min-h-[300px] xl:max-h-[60vh]">
             {filteredWatchList.map((movie) => (
               <div
                 key={movie.id}
-                className="w-full flex flex-col bg-[#12234b] rounded-xl px-4 py-4 gap-1 transition ease-in-out duration-300"
+                className="w-full flex flex-col bg-[#12234b] rounded-xl px-4 py-4 gap-1.5 transition ease-in-out duration-300"
               >
-                <div className="flex justify-between items-start gap-16">
+                <div className="flex justify-between items-start gap-16 sm:gap-5">
                   {" "}
                   <h1 className="">
                     <span className="text-gray-300 text-base font-light">
