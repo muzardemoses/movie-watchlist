@@ -11,6 +11,7 @@ export const SearchResults = ({
   setWatchList,
   movieTitle,
 }) => {
+  // Pagination
   const [pageNumber, setPageNumber] = useState(0);
   const moviesPerPage = 5;
   const pagesVisited = pageNumber * moviesPerPage;
@@ -20,6 +21,7 @@ export const SearchResults = ({
     setPageNumber(selected);
   };
 
+  // Display the movies
   const displayMovies = searchResults
     .slice(pagesVisited, pagesVisited + moviesPerPage)
     .map((movie) => {
@@ -36,15 +38,19 @@ export const SearchResults = ({
 
   return (
     <div className="h-full bg-[#1e2a47] rounded-xl p-10 pb-14 shadow-xl sm:p-6 sm:pb-10">
+      {/* If the loading state is true, display the loading message */}
       {loading && (
         <div className="h-full flex justify-center items-center">
           <p className="text-[#f9f9f9] text-lg font-light">Loading...</p>
         </div>
       )}
+      {/* If the search input and the search results are empty, display the default movies */}
       {!loading && searchResults.length === 0 && movieTitle.length === 0 ? (
         <div className="h-full">
+          {/* DefaultMovies component */}
           <DefaultMovies setWatchList={setWatchList} />
         </div>
+        // If the search input is not empty and the search results are empty, display the message
       ) : !loading && movieTitle.length > 0 && searchResults.length === 0 ? (
         <div className="h-full flex justify-center items-center">
           <p className="text-[#f9f9f9] text-lg font-light">
@@ -52,6 +58,7 @@ export const SearchResults = ({
           </p>
         </div>
       ) : (
+        // If the search results are not empty, display the movies from the search results
         !loading &&
         searchResults.length > 0 && (
           <div className="flex flex-col gap-16 sm:gap-10">
@@ -67,6 +74,7 @@ export const SearchResults = ({
               <div className="flex flex-col gap-3">{displayMovies}</div>
               <div>
                 {/* Styling for the pagination component is in src\App.css */}
+                {/* ReactPaginate component */}
                 <ReactPaginate
                   previousLabel={"Prev"}
                   nextLabel={"Next"}

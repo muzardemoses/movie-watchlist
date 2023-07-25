@@ -3,6 +3,7 @@ import { handleRating } from "../Hooks";
 import NoRatedStarSVG from "../assets/NoRatedStar.svg";
 import RatedStarSVG from "../assets/RatedStar.svg";
 
+// Rating component
 export const Rating = ({movie, watchList, setWatchList }) => {
     return (
         <div className="flex gap-1 items-center">

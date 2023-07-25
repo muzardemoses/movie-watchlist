@@ -7,7 +7,10 @@ export const SearchBar = ({
   setSearchResults,
   setLoading,
 }) => {
+  // Get the API key from the environment variable
   const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+
+  // Fetch the data from the API
   useEffect(() => {
     const options = {
       method: "GET",

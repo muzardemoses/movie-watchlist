@@ -6,18 +6,22 @@ import CloseSVG from "../assets/Close.svg";
 
 
 export const WatchList = ({ watchList, setWatchList }) => {
+  // State to store and toggle the filter
   const [showWatchedOnly, setShowWatchedOnly] = useState(false);
 
+  // Function to set the filter in the local storage
   const handleSetFilter = (filter) => {
     setShowWatchedOnly(filter);
     localStorage.setItem("showWatchedOnly", JSON.stringify(filter));
   };
 
+  // Get the watchlist from the local storage
   useEffect(() => {
     const savedWatchList = JSON.parse(localStorage.getItem("watchList"));
     setWatchList(savedWatchList || []);
   }, [setWatchList]);
 
+  // Set the filter from the local storage
   useEffect(() => {
     const savedFilter = JSON.parse(localStorage.getItem("showWatchedOnly"));
     if (savedFilter) {
@@ -69,12 +73,14 @@ export const WatchList = ({ watchList, setWatchList }) => {
       </div>
 
       <div className="h-full flex justify-center">
+        {/*  If the watchlist is empty, display the message */}
         {filteredWatchList.length === 0 ? (
           <h3 className="flex justify-center items-center text-white text-center text-xl xl:min-h-[300px]">
             Your Watchlist is Empty
           </h3>
         ) : (
           <div className="w-full flex flex-col items-start gap-4 pb-8 overflow-y-auto max-h-[58vh] watchlist-container xl:min-h-[300px] xl:max-h-[60vh]">
+            {/*  Display watchlist movies */}
             {filteredWatchList.map((movie) => (
               <div
                 key={movie.id}
@@ -91,6 +97,7 @@ export const WatchList = ({ watchList, setWatchList }) => {
                       ({movie.release_date.slice(0, 4)})
                     </span>
                   </h1>
+                  {/*  Remove movie from watchlist */}
                   <button
                     className="text-white p-2 rounded-full bg-[#1b2c52] hover:bg-[#1e2a47] transition ease-in-out duration-300"
                     onClick={() =>
@@ -103,6 +110,7 @@ export const WatchList = ({ watchList, setWatchList }) => {
                 <div className="flex gap-5 text-white">
                   <div className="flex gap-1 items-center">
                     <p className="text-sm font-light">Watched: </p>
+                    {/*  Toggle the watched state of the movie */}
                     <input
                       type="checkbox"
                       checked={movie.isWatched}
@@ -112,6 +120,7 @@ export const WatchList = ({ watchList, setWatchList }) => {
                       className="cursor-pointer"
                     />
                   </div>
+                  {/*  Display and rate the movie component */}
                   <Rating
                     movie={movie}
                     watchList={watchList}
