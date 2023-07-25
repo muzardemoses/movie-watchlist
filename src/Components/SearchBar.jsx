@@ -7,13 +7,14 @@ export const SearchBar = ({
   setSearchResults,
   setLoading,
 }) => {
+  const VITE_API_KEY = import.meta.env.VITE_API_KEY;
   useEffect(() => {
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MDAyMDc2YzhkZTc0MDMwODZkZjM0YTg3MjAxOGNlNyIsInN1YiI6IjY0YmM2M2IxZTlkYTY5MDEyZTBkZDBlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mzhh49XVRxyQjBXW-7lxSTu7kTzDOakFDA1CPPq7NyU",
+          `Bearer ${VITE_API_KEY}`
       },
     };
 
@@ -32,7 +33,7 @@ export const SearchBar = ({
         console.log(err);
         setLoading(false);
       });
-  }, [movieTitle, setLoading, setSearchResults]); // Run the effect whenever the movieTitle changes
+  }, [movieTitle, setLoading, setSearchResults, VITE_API_KEY]);   // Run the effect whenever the movieTitle changes
 
   return (
     <div className="relative">

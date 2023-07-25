@@ -24,7 +24,7 @@ export const handleAddToWatchList = (movie, setWatchList) => {
     // Update the watchlist state with the new movie
     setWatchList(updatedWatchList);
 
-    alert(movie.title + " added to watchlist");
+    //alert(movie.title + " added to watchlist");
   } else {
     alert(movie.title + " already exists in the watchlist");
   }
