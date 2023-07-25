@@ -4,6 +4,7 @@
 
 - [Overview](#overview)
 - [Screenshot](#screenshot)
+- [Links](#links)
 - [Requirements](#requirements)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
@@ -22,6 +23,11 @@ Movie Watchlist is a ReactJS application that allows users to create a personali
 
 ![Movie Watchlist](./public/screen-shot.JPG)
 
+
+## Links
+
+- [Live Site URL](https://movie-watchlist-ma.netlify.app/)
+- [GitHub Repository](https://github.com/muzardemoses/movie-watchlist)
 
 ## Requirements
 
