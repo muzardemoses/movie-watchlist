@@ -18,7 +18,7 @@ function App() {
 
 
   return (
-    <div className="bg-[#141d2f] flex gap-24 pt-28 px-20 pb-28 overflow-hidden xl:flex-col md:px-8 sm:pt-14 sm:pb-12 sm:gap-16 sm:px-5">
+    <div className="bg-[#141d2f] min-h-screen flex gap-24 pt-28 px-20 pb-28 overflow-hidden xl:flex-col md:px-8 sm:pt-14 sm:pb-12 sm:gap-16 sm:px-5">
       <div className="w-[45%] flex flex-col gap-16 xl:w-full sm:gap-10">
         {/* SearchBar component  with props */}
         <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle} setSearchResults={setSearchResults} setLoading={setLoading} />
