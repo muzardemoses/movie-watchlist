@@ -26,7 +26,7 @@ Movie Watchlist is a ReactJS application that allows users to create a personali
 
 ## Links
 
-- [Live Site URL](https://movie-watchlist-ma.netlify.app/)
+- [Live Site URL](https://watchlist.mosesadebayo.me/)
 - [GitHub Repository](https://github.com/muzardemoses/movie-watchlist)
 
 ## Requirements
